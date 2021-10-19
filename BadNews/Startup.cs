@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Serilog;
 
 namespace BadNews
 {
@@ -47,6 +48,7 @@ namespace BadNews
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseStatusCodePagesWithReExecute("/StatusCode/{0}");
+            app.UseSerilogRequestLogging();
 
             app.Map("/news", newsApp =>
             {
