@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace BadNews
 {
@@ -39,7 +40,10 @@ namespace BadNews
         // В этом методе конфигурируется последовательность обработки HTTP-запроса
         public void Configure(IApplicationBuilder app)
         {
-            app.UseDeveloperExceptionPage();
+            if (env.IsDevelopment())
+                app.UseDeveloperExceptionPage();
+            else
+                app.UseExceptionHandler("/Errors/Exception");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseStatusCodePagesWithReExecute("/StatusCode/{0}");
@@ -67,6 +71,7 @@ namespace BadNews
                     controller = "Errors",
                     action = "StatusCode"
                 });
+                endpoints.MapControllerRoute("default", "{controller}/{action}");
             });
 
             // Остальные запросы — 404 Not Found
