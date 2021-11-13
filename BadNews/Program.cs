@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using BadNews.Repositories.News;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 
@@ -45,9 +46,15 @@ namespace BadNews
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                    webBuilder.UseEnvironment(Environments.Development);
                 })
                 .UseSerilog((hostingContext, loggerConfiguration) =>
-                    loggerConfiguration.ReadFrom.Configuration(hostingContext.Configuration));
+                    loggerConfiguration.ReadFrom.Configuration(hostingContext.Configuration))
+                .ConfigureHostConfiguration(config =>
+                {
+                    config.AddJsonFile("appsettings.Secret.json", true, false);
+                });
+
         }
 
         private static void InitializeDataBase()

@@ -4,7 +4,7 @@ namespace BadNews.Repositories.Weather
 {
     public class WeatherForecast
     {
-        private const string defaultWeatherImageUrl = "/images/cloudy.png";
+        private const string DefaultWeatherImageUrl = "/images/cloudy.png";
 
         public int TemperatureInCelsius { get; set; }
         public string IconUrl { get; set; }
@@ -13,8 +13,8 @@ namespace BadNews.Repositories.Weather
         {
             return new WeatherForecast
             {
-                TemperatureInCelsius = forecast.Main.Temp,
-                IconUrl = forecast.Weather.FirstOrDefault()?.IconUrl ?? defaultWeatherImageUrl
+                TemperatureInCelsius = (int)forecast.Main.Temp,
+                IconUrl = forecast.Weather.FirstOrDefault()?.IconUrl ?? DefaultWeatherImageUrl
             };
         }
     }
