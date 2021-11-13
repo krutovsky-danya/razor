@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 
@@ -15,7 +14,19 @@ namespace BadNews.Elevation
     
         public async Task InvokeAsync(HttpContext context)
         {
-            throw new NotImplementedException();
+            await next(context);
+
+            var path = context.Request.Path;
+            if (path.Value == null) return;
+            if (!path.Value.EndsWith("/elevation")) return;
+
+            var cookies = context.Response.Cookies;
+            if (context.Request.Query.ContainsKey("up"))
+                cookies.Append(ElevationConstants.CookieName, ElevationConstants.CookieValue);
+            else
+                cookies.Delete(ElevationConstants.CookieName);
+
+            context.Response.Redirect("/");
         }
     }
 }

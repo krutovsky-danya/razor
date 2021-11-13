@@ -1,4 +1,9 @@
-﻿
+﻿@using BadNews.Elevation
+@if (ViewContext.IsElevated())
+{
+    <span class="text-primary ml-2">есть привилегии</span>
+}
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
