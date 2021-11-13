@@ -1,0 +1,50 @@
+﻿@model BadNews.Models.Editor.IndexViewModel
+
+@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+
+<main role="main" class="container">
+    <div class="row">
+        <div class="m-auto">
+            <form asp-controller="Editor" asp-action="CreateArticle">
+                <div class="p-2">
+                    <div>
+                        <label>Заголовок*</label>
+                    </div>
+                    <div>
+                        <input asp-for="Header" type="text" size="80">
+                    </div>
+                    <div>
+                        <span class="text-danger" asp-validation-for="Header"></span>
+                    </div>
+                </div>
+                <div class="p-2">
+                    <div class="mr-2">
+                        <label>Тизер</label>
+                    </div>
+                    <div>
+                        <textarea asp-for="Teaser" cols="80" rows="5"></textarea>
+                    </div>
+                    <div>
+                        <span class="text-danger" asp-validation-for="Teaser"></span>
+                    </div>
+                </div>
+                <div class="p-2">
+                    <div class="mr-2"><label>Текст статьи в HTML</label></div>
+                    <div>
+                        <textarea asp-for="ContentHtml" cols="80" rows="15"></textarea>
+                    </div>
+                    <div>
+                        <span class="text-danger" asp-validation-for="ContentHtml"></span>
+                    </div>
+                </div>
+                <div class="p-2 mb-4 text-center">
+                    <button class="btn btn-primary" type="submit">Отправить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
