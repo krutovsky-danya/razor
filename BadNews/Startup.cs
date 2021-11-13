@@ -40,6 +40,7 @@ namespace BadNews
                 mvcBuilder.AddRazorRuntimeCompilation();
 
             services.AddResponseCompression(options => { options.EnableForHttps = true; });
+            services.AddMemoryCache();
         }
 
         // В этом методе конфигурируется последовательность обработки HTTP-запроса
