@@ -11,6 +11,11 @@ namespace BadNews.Elevation
         {
             this.next = next;
         }
+
+        private readonly CookieOptions cookieOptions = new()
+        {
+            HttpOnly = true
+        };
     
         public async Task InvokeAsync(HttpContext context)
         {
@@ -22,7 +27,7 @@ namespace BadNews.Elevation
 
             var cookies = context.Response.Cookies;
             if (context.Request.Query.ContainsKey("up"))
-                cookies.Append(ElevationConstants.CookieName, ElevationConstants.CookieValue);
+                cookies.Append(ElevationConstants.CookieName, ElevationConstants.CookieValue, cookieOptions);
             else
                 cookies.Delete(ElevationConstants.CookieName);
 
