@@ -1,14 +1,13 @@
-﻿@using System.Web
-@model BadNews.Models.News.IndexModel
+﻿@model BadNews.Models.News.IndexModel
 @{
     Layout = "_Layout";
 }
 
 @section Header
 {
-    @foreach (var article in Model.FeaturedArticles)
-    {
-        <div class="row mb-2">
+    <div class="row mb-2">
+        @foreach (var article in Model.FeaturedArticles)
+        {
             <div class="col-md-6">
                 <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                     <div class="col p-4 d-flex flex-column position-static">
@@ -21,8 +20,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-    }
+        }
+    </div>
 }
 
 <!-- Body -->
@@ -53,7 +52,7 @@
                 }
                 else
                 {
-                    <a class="btn btn-outline-primary" asp-controller="News" asp-route-pageIndex="@(Model.PageIndex - 1)">
+                    <a class="btn btn-outline-primary" asp-controller="News" asp-route-year="@Model.Year" asp-route-pageIndex="@(Model.PageIndex - 1)">
                         Новее
                     </a>
                 }
@@ -64,7 +63,7 @@
                 }
                 else
                 {
-                    <a class="btn btn-outline-primary" asp-controller="News" asp-route-pageIndex="@(Model.PageIndex + 1)">
+                    <a class="btn btn-outline-primary" asp-controller="News" asp-route-year="@Model.Year" asp-route-pageIndex="@(Model.PageIndex + 1)">
                         Старше
                     </a>
                     
@@ -73,6 +72,8 @@
         </div>
 
         <aside class="col-md-4 news-sidebar">
+            <vc:archive-links> </vc:archive-links>
+            <vc:weather> </vc:weather>
         </aside>
     </div>
 </main>
